@@ -1,8 +1,10 @@
 package mjc.dao;
 
-import generator.User;
-import generator.UserExample;
+
 import java.util.List;
+
+import mjc.domain.User;
+import mjc.domain.UserExample;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
