@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+          PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+              "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!-- mybatis 逆向生成工具 ，在pom 添加 plugin 插件 -->
+<generatorConfiguration>
+    <context id="db2Java" targetRuntime="MyBatis3"  defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8" />
+        <property name="mergeable" value="false"></property>
+        <property name="modelOnly" value="true"></property>
+
+        <!--plugin 通用mapper 配置 在pom 文件 同时也要加上 tk.mybatis，否则为普通mapper -->
+        <!-- 而且很奇怪的是必须在 main 下生成一个resources 文件夹 ，并且把 generatorConfig -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper" />
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="false" />
+            <!-- 是否生成注释代时间戳 -->
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <!-- jdbc 连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/sort?characterEncoding=UTF-8"
+                        userId="root" password="root" />
+
+        <!-- 生成domain 的位置-->
+        <javaModelGenerator targetPackage="generator" targetProject="src" />
+
+        <!-- 生成xml  的位置-->
+        <sqlMapGenerator targetPackage="generator" targetProject="src" />
+        <!-- 生成mapper 的位置-->
+        <javaClientGenerator type="XMLMAPPER"  targetPackage="generator" targetProject="src" />
+
+
+            <table   tableName="t_user"  domainObjectName="User">
+            </table>
+        </context>
+
+    </generatorConfiguration>
