@@ -2,6 +2,7 @@ package mode.strategy;
 
 /**
  * Created by gcb on 2018/12/17.
+ * 此类事用来操作计算的
  */
 public class Context {
     private Strategy strategy ;

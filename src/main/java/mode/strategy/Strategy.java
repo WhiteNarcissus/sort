@@ -5,4 +5,5 @@ package mode.strategy;
  */
 public interface Strategy {
     double opt(double a , double b);
+
 }
