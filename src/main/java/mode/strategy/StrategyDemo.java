@@ -13,6 +13,14 @@ public class StrategyDemo {
 
    AbstractCollection b = new ArrayList();
 
+   public static void main(String[] args){
+      Context context = new Context(new ReduceStrategy());
+      double a = context.execute(1.1,2.1);
+      System.out.println("加法"+a);
+
+   }
+
+
 
 
 };

@@ -11,7 +11,7 @@ public class Context {
     }
 
     public Context(Strategy strategy){
-
+        this.strategy = strategy;
     }
 
     public  double execute(double a , double b ){
