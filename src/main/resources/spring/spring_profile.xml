@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
-    <!-- spring profiles 配置不同profile -->
+    <!-- spring profiles 配置不同profile  -->
     <beans profile="dev">
         <util:properties id="jdbc"
                          location="classpath:config/dev/config.properties" />

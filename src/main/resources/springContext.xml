@@ -25,17 +25,6 @@
 
 
 
-    <!--连接池 c3p0 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost/test?characterEncoding=utf8&amp;serverTimezone=UTC"></property>
-        <property name="user" value="root"></property>
-        <property name="password" value="root"></property>
-        <property name="minPoolSize" value="1"></property>
-        <property name="maxPoolSize" value="5"></property>
-        <property name="initialPoolSize" value="1"></property>
-        <property name="acquireIncrement" value="1"></property>
-    </bean>
 
 
 </beans>

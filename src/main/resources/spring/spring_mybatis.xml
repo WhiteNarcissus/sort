@@ -18,23 +18,18 @@
         <context:component-scan base-package="mjc.dao" />
         <context:component-scan base-package="mjc.service" />
 
+    <!--连接池 c3p0 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost/test?characterEncoding=utf8&amp;serverTimezone=UTC"></property>
+        <property name="user" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="minPoolSize" value="1"></property>
+        <property name="maxPoolSize" value="5"></property>
+        <property name="initialPoolSize" value="1"></property>
+        <property name="acquireIncrement" value="1"></property>
+    </bean>
 
-        <!--数据源配置-->
-        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-              destroy-method="close">
-            <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
-            <property name="driverClassName" value="#{jdbc['jdbc.driverName']}"/>
-            <!-- 基本属性 url、user、password -->
-            <property name="url" value="#{jdbc['jdbc.url']}" />
-            <property name="username" value="#{jdbc['jdbc.username']}" />
-            <property name="password" value="#{jdbc['jdbc.password']}" />
-            <!-- 配置初始化大小、最小、最大 -->
-            <property name="initialSize" value="#{jdbc['jdbc.pool.minIdle']}" />
-            <property name="minIdle" value="#{jdbc['jdbc.pool.minIdle']}" />
-            <property name="maxActive" value="#{jdbc['jdbc.pool.maxActive']}" />
-            <!-- 配置获取连接等待超时的时间 -->
-            <property name="maxWait" value="#{jdbc['jdbc.pool.maxWait']}" />
-        </bean>
 
         <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
