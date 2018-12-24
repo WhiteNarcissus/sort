@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
  * 用来自己封装 redisTemple 操作redis的增删改查
  * 采取Spring 注解方式进行封装
  */
-
 @Component
 public class RedisCaheUtils {
 

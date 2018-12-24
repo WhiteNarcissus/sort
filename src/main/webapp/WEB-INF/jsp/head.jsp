@@ -11,4 +11,4 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/";
 %>
 <!-- 静态资源文件 如果放在WEB-INF 会报404-->
-<script src="<%=basePath%>importjs/jquery-3.3.1.min.js" ></script>
+<script src="<%=basePath%>sort/importjs/jquery-3.3.1.min.js" ></script>

@@ -21,7 +21,7 @@
     <import resource="classpath:spring/spring_mvc.xml" />
     <import resource="classpath:spring/spring_profile.xml" />
     <import resource="classpath:spring/spring_redis.xml" />
-
+    <import resource="classpath:spring/spring_mybatis.xml" />
 
 
 
