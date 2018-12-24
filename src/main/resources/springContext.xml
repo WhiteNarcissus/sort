@@ -20,7 +20,7 @@
     <context:annotation-config></context:annotation-config>
     <import resource="classpath:spring/spring_mvc.xml" />
     <import resource="classpath:spring/spring_profile.xml" />
-
+    <import resource="classpath:spring/spring_redis.xml" />
 
 
 

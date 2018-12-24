@@ -10,7 +10,7 @@
   <servlet>
     <servlet-name>spring-mvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!-- 指定路径 -->
+    <!-- 配置spring-mvc -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:springContext.xml</param-value>
@@ -23,17 +23,11 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
-  <!-- 配置适配器spring -->
+  <!-- 配置spring -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:springContext.xml</param-value>
   </context-param>
-
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-
-
 
   <!--spring profile 上下文参数 -->
   <context-param>
@@ -44,6 +38,16 @@
     <param-name>spring.profiles.active</param-name>
     <param-value>produce</param-value>
   </context-param>
+
+
+  <!--spring的监听器 初始化Spring容器 MVC框架可以直接调用Spring容器中的Bean，
+  无需访问Spring容器本身。在这种情况下，容器中的Bean处于容器管理下，无需主动访问容器，只需接受容器的依赖注入即可（通过 mvc 的注解实现 ）-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+
 
 
 </web-app>
