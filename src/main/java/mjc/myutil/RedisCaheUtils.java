@@ -1,9 +1,16 @@
 package mjc.myutil;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -23,7 +30,34 @@ public class RedisCaheUtils {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+
+
     private Logger logger = LoggerFactory.getLogger(RedisUtils.class);
+
+
+
+    /**
+     * 设置 序列化器
+     * ObjectMapper类是Jackson库的主要类。它提供一些功能将转换成Java对象匹配JSON结构，反之亦然。它使用JsonParser和JsonGenerator的实例实现JSON实际的读/写。
+     */
+    public void setRedisSerializer(){
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer =new Jackson2JsonRedisSerializer(Object.class);
+        redisTemplate.setDefaultSerializer(jackson2JsonRedisSerializer);
+        ObjectMapper objectMapper = new ObjectMapper();
+        //序列化的时候序列对象的所有属性
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+        // 设置value的序列化规则和 key的序列化规则
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.afterPropertiesSet();
+
+    }
+
+
 
 
     /**
@@ -84,6 +118,33 @@ public class RedisCaheUtils {
         }
     }
 
+    // =============================object===========================
+    /**
+     * java 对象转为json 放入缓存
+     * @param  key
+     * @
+     */
+     public void oset(String key ,Object o){
+         try {
+             //自定义的序列化器
+             setRedisSerializer();
+             redisTemplate.opsForValue().set(key, o);
+         }catch (Exception e){
+             logger.error("object存入缓存失败" ,e.getMessage());
+         }
+     }
+     public Object oget(String key){
+         try{
+             //自定义的序列化器
+             setRedisSerializer();
+            return redisTemplate.opsForValue().get(key);
+         }catch (Exception e){
+             logger.error("object获取缓存失败" ,e.getMessage());
+             return null ;
+         }
+
+     }
+
     // ============================String=============================
 
     /**
@@ -108,7 +169,7 @@ public class RedisCaheUtils {
             redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置入缓存失败" ,e.getMessage());
             return false;
         }
 
@@ -131,7 +192,7 @@ public class RedisCaheUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置入缓存失败" ,e.getMessage());
             return false;
         }
     }

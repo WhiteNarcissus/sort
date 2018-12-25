@@ -4,6 +4,8 @@ import mjc.domain.User;
 import mjc.myutil.RedisCaheUtils;
 
 import mjc.myutil.RedisUtils;
+import mode.generic.Code;
+import mode.generic.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +26,18 @@ public class LoginController {
 
 
         ModelAndView modelAndView = new ModelAndView();
+        ReturnObject returnObject = new ReturnObject();
+        returnObject.setCode(Code.SUCCESS);
+        returnObject.setData(user);
+        returnObject.setMsg("用户："+ user.getUserName() +"---登入");
 
-     redisCaheUtils.set("rty","rty");
-       String b = redisCaheUtils.get("rty").toString();
+        redisCaheUtils.oset(user.getUserName(),user);
 
 
-
+//       redisCaheUtils.set("rty","rty");
+//       String b = redisCaheUtils.get("rty").toString();
+        modelAndView.setViewName("");
+        modelAndView.addObject(returnObject);
 
         return modelAndView;
     }
