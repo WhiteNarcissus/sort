@@ -22,8 +22,7 @@
     <import resource="classpath:spring/spring_profile.xml" />
     <import resource="classpath:spring/spring_redis.xml" />
     <import resource="classpath:spring/spring_mybatis.xml" />
-
-
+    <import resource="classpath:spring/spring_shiro.xml" />
 
 
 
