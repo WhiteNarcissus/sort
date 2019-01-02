@@ -5,6 +5,7 @@ import java.util.Collection;
 /**
  * Created by gcb on 2018/12/17.
  * 此类事用来操作计算的
+ * 这里将策略 注入。 典型的依赖倒置
  */
 public class Context  {
     private Strategy strategy ;
