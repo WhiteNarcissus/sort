@@ -36,8 +36,10 @@
         <javaClientGenerator type="XMLMAPPER"  targetPackage="generator" targetProject="src" />
 
 
-            <table   tableName="t_user"  domainObjectName="User">
-            </table>
+        <table   tableName="t_role"  domainObjectName="Role"></table>
+        <table   tableName="t_permission"  domainObjectName="Permission"></table>
+        <table   tableName="t_role"  domainObjectName="Role"></table>
+
         </context>
 
     </generatorConfiguration>

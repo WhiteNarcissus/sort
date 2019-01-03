@@ -3,13 +3,18 @@ package mjc.controller;
 import mjc.domain.User;
 import mjc.myutil.RedisCaheUtils;
 
-import mjc.myutil.RedisUtils;
 import mode.generic.Code;
 import mode.generic.ReturnObject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by gcb on 2018/12/12.
@@ -22,7 +27,7 @@ public class LoginController {
 
 
     @RequestMapping("/signUp")
-    public ModelAndView  image(User user) {
+    public ModelAndView  image(User user, HttpSession session) {
 
 
         ModelAndView modelAndView = new ModelAndView();
@@ -31,15 +36,38 @@ public class LoginController {
         returnObject.setData(user);
         returnObject.setMsg("用户："+ user.getUserName() +"---登入");
 
-        redisCaheUtils.oset(user.getUserName(),user);
+        if(user.getUserName()==null){
+            returnObject.setCode(Code.SUCCESS);
+            returnObject.setMsg("用户名为空");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
+        //主体,当前状态为没有认证的状态“未认证”
+        Subject subject = SecurityUtils.getSubject();
+        // 登录后存放进shiro token
+        try {
+        UsernamePasswordToken token=new UsernamePasswordToken(user.getUserName(), user.getUserPassword());
+        //登录方法（认证是否通过）
+        //使用subject调用securityManager,安全管理器调用Realm
 
-
-//       redisCaheUtils.set("rty","rty");
-//       String b = redisCaheUtils.get("rty").toString();
-        modelAndView.setViewName("");
-        modelAndView.addObject(returnObject);
+            //利用异常操作
+            //需要开始调用到Realm中
+            System.out.println("========================================");
+            System.out.println("1、进入认证方法");
+            subject.login(token);
+            user = (User)subject.getPrincipal();
+            session.setAttribute("user",subject);
+            modelAndView.setViewName("menu");
+            //放入缓冲
+            redisCaheUtils.oset(user.getUserName(),user);
+            System.out.println("登录完成");
+        } catch (UnknownAccountException e) {
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
 
         return modelAndView;
+
     }
 
 

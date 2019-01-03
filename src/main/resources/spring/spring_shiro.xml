@@ -27,10 +27,11 @@
 
     <!-- 自定义Realm -->
     <bean id="myShiroRealm" class="mjc.realm.MyRealm">
-        <!-- businessManager 用来实现用户名密码的查询
         <property name="shiroService" ref="accountService" />
-        -->
     </bean>
+
+    <!--声明一个Service 注入到自定义Realm-->
+    <bean id="accountService" class="mjc.service.impl.ShiroServiceImpl"/>
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 注入realm -->

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mjc.dao.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="mjc.domain.User" >
+<mapper namespace="mjc.dao.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="mjc.domain.Permission" >
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
-    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="user_hobbit" property="userHobbit" jdbcType="VARCHAR" />
-    <result column="user_message" property="userMessage" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+    <result column="descriptiion" property="descriptiion" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--
@@ -82,10 +78,9 @@
     <!--
       WARNING - @mbg.generated
     -->
-    user_id, user_name, user_password, created_time, update_time, user_phone, user_hobbit, 
-    user_message
+    id, role_id, permission, descriptiion
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="generator.UserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="generator.PermissionExample" >
     <!--
       WARNING - @mbg.generated
     -->
@@ -94,7 +89,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user
+    from t_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,20 +97,20 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="generator.UserExample" >
+  <delete id="deleteByExample" parameterType="generator.PermissionExample" >
     <!--
       WARNING - @mbg.generated
     -->
-    delete from t_user
+    delete from t_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="generator.UserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="generator.PermissionExample" resultType="java.lang.Integer" >
     <!--
       WARNING - @mbg.generated
     -->
-    select count(*) from t_user
+    select count(*) from t_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -124,31 +119,19 @@
     <!--
       WARNING - @mbg.generated
     -->
-    update t_user
+    update t_permission
     <set >
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.userName != null" >
-        user_name = #{record.userName,jdbcType=VARCHAR},
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
-      <if test="record.userPassword != null" >
-        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      <if test="record.permission != null" >
+        permission = #{record.permission,jdbcType=VARCHAR},
       </if>
-      <if test="record.createdTime != null" >
-        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateTime != null" >
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.userPhone != null" >
-        user_phone = #{record.userPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userHobbit != null" >
-        user_hobbit = #{record.userHobbit,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userMessage != null" >
-        user_message = #{record.userMessage,jdbcType=VARCHAR},
+      <if test="record.descriptiion != null" >
+        descriptiion = #{record.descriptiion,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -159,26 +142,13 @@
     <!--
       WARNING - @mbg.generated
     -->
-    update t_user
-    set user_id = #{record.userId,jdbcType=BIGINT},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      user_password = #{record.userPassword,jdbcType=VARCHAR},
-      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      user_phone = #{record.userPhone,jdbcType=VARCHAR},
-      user_hobbit = #{record.userHobbit,jdbcType=VARCHAR},
-      user_message = #{record.userMessage,jdbcType=VARCHAR}
+    update t_permission
+    set id = #{record.id,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=BIGINT},
+      permission = #{record.permission,jdbcType=VARCHAR},
+      descriptiion = #{record.descriptiion,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-
-      <select id="queryRolePermissionByUser" parameterType="mjc.domain.User">
-        SELECT p.id,p.permission,p.description,p.role_id FROM t_permission p
-        WHERE p.role_id =(
-        SELECT ur.role_id FROM t_user_role ur
-        LEFT JOIN t_role r ON r.id = ur.role_id
-        LEFT JOIN t_user u ON u.user_id = ur.user_id
-        WHERE u.user_name =#{user.username} )
-      </select>
 </mapper>

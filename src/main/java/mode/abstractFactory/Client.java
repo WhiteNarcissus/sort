@@ -4,7 +4,7 @@ import mode.simplFactory.Factory;
 
 /**
  * Created by gcb on 2019/1/2.
- * 这么设计的确可以 将具体的实现类 与 客户端分类 ，且可满足 修改一处 便可 切换 大厂 和小厂
+ *抽象工厂模式 的确可以 将具体的实现类 与 客户端分类 ，且可满足 修改一处 便可 切换 大厂 和小厂
  * 但是 也有问题 假如在 AbstractFactory 里面增加 一个新出品  电子手表 新增三个类 修改 AbstractFactory bigFactory smallFactory
  *
  */

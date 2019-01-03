@@ -3,8 +3,10 @@ package mjc.dao;
 
 import java.util.List;
 
+import mjc.dao.example.UserExample;
+import mjc.domain.Permission;
 import mjc.domain.User;
-import mjc.domain.UserExample;
+
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -18,4 +20,6 @@ public interface UserMapper extends Mapper<User> {
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    List<Permission> queryRolePermissionByUser(User user);
 }

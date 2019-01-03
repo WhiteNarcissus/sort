@@ -1,4 +1,4 @@
-package mjc.domain;
+package mjc.dao.example;
 
 import java.util.ArrayList;
 import java.util.Date;
