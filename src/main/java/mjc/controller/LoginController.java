@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,22 +27,33 @@ public class LoginController {
    private RedisCaheUtils redisCaheUtils ;
 
 
-    @RequestMapping("/signUp")
+//    @RequestMapping("/signUp")
     public ModelAndView  image(User user, HttpSession session) {
 
 
         ModelAndView modelAndView = new ModelAndView();
         ReturnObject returnObject = new ReturnObject();
-        returnObject.setCode(Code.SUCCESS);
-        returnObject.setData(user);
-        returnObject.setMsg("用户："+ user.getUserName() +"---登入");
+
+        //注册
+        if(user.getUserPhone() != null &&  !"".equals(user.getUserPhone())){
+            returnObject.setCode(Code.SUCCESS);
+            returnObject.setData(user);
+            returnObject.setMsg("用户："+ user.getUserName() +"---注册");
+            modelAndView.setViewName("/jsp/shiro/permission.jsp");
+            modelAndView.addObject(user);
+
+            return modelAndView;
+        }
+
 
         if(user.getUserName()==null){
             returnObject.setCode(Code.SUCCESS);
             returnObject.setMsg("用户名为空");
-            modelAndView.setViewName("index");
+            modelAndView.setViewName("/shiro/permissions");
             return modelAndView;
         }
+
+
         //主体,当前状态为没有认证的状态“未认证”
         Subject subject = SecurityUtils.getSubject();
         // 登录后存放进shiro token
@@ -61,6 +73,10 @@ public class LoginController {
             //放入缓冲
             redisCaheUtils.oset(user.getUserName(),user);
             System.out.println("登录完成");
+
+            returnObject.setCode(Code.SUCCESS);
+            returnObject.setData(user);
+            returnObject.setMsg("用户："+ user.getUserName() +"---登入");
         } catch (UnknownAccountException e) {
             modelAndView.setViewName("index");
             return modelAndView;
@@ -70,6 +86,12 @@ public class LoginController {
 
     }
 
+    @RequestMapping("/signUp")
+    public String aa(){
+
+
+        return  "shiro/permissions";
+    }
 
 
 }

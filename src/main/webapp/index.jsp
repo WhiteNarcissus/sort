@@ -53,7 +53,7 @@
                 data:$("#login").serialize(),
                 type:"POST",
                 success:function () {
-                  alert("signUp");
+                 window.location.href=ctx+'permissions/list'
                 }
 
             })

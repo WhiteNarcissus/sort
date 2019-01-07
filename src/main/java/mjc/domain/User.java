@@ -40,6 +40,8 @@ public class User implements Serializable {
     @Column(name = "user_message")
     private String userMessage;
 
+
+
     /**
      * 获取用户id
      *

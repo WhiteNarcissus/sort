@@ -21,6 +21,8 @@ import java.util.List;
  */
 public class MyRealm extends AuthorizingRealm {
 
+
+    //这个service 不知道为什么通过 注解就是无法注入 只好通过<bean> 注入
     private ShiroService shiroService;
 
 
