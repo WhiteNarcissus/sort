@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: gcb
@@ -17,9 +18,16 @@
   <from  action="/permission/list"  id="permissionForm" method="post">
        <label >角色</label>
       <select name="role-permission-edit" id="roleId">
+          <c:forEach var="role" items="${list}" >
+           <option value="" selected >${role}</option>
+          </c:forEach>
 
       </select>
+      <br>
       <label >权限</label>
+      <tr>
+          <td>模块</td>
+      </tr>
 
       <p>
           <button id="savePermission" value="保存">保存</button>

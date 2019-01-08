@@ -27,7 +27,7 @@ public class LoginController {
    private RedisCaheUtils redisCaheUtils ;
 
 
-//    @RequestMapping("/signUp")
+   @RequestMapping("/signUp")
     public ModelAndView  image(User user, HttpSession session) {
 
 
@@ -39,9 +39,9 @@ public class LoginController {
             returnObject.setCode(Code.SUCCESS);
             returnObject.setData(user);
             returnObject.setMsg("用户："+ user.getUserName() +"---注册");
-            modelAndView.setViewName("/jsp/shiro/permission.jsp");
-            modelAndView.addObject(user);
 
+              modelAndView.addObject(user);
+              modelAndView.setViewName("redirect: home/indexHome");
             return modelAndView;
         }
 
@@ -78,19 +78,24 @@ public class LoginController {
             returnObject.setData(user);
             returnObject.setMsg("用户："+ user.getUserName() +"---登入");
         } catch (UnknownAccountException e) {
-            modelAndView.setViewName("index");
-            return modelAndView;
+
+            return null;
         }
 
         return modelAndView;
 
     }
 
-    @RequestMapping("/signUp")
-    public String aa(){
+  // @RequestMapping("/signUp")
+    public ModelAndView aa(){
 
+        //重定向
+       // return "redirect: permissions/list";
 
-        return  "shiro/permissions";
+       ModelAndView modelAndView = new ModelAndView();
+       //modelAndView.setViewName("redirect: shiro/permissions");
+       modelAndView.setViewName("forward:permissions/list");
+      return modelAndView;
     }
 
 

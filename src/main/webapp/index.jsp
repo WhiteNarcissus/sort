@@ -43,17 +43,20 @@
        })
     });
 
+
+
     $("#signUp").click(function (){
         $(".retry").show();
         var userPassword=$("#userPassword").val();
         var checkPassword=$("#checkPassword").val();
-        if(checkPassword==userPassword){
+        if(checkPassword==userPassword && checkPassword !=""){
             $.ajax({
-                url:ctx+'signUp.do',
+                url:ctx+'signUp',
                 data:$("#login").serialize(),
                 type:"POST",
                 success:function () {
-                 window.location.href=ctx+'permissions/list'
+                    // 这里的 跳转 就像 向浏览器重新 输入一个地址所以最好不要用ajax做跳转 ，这样显得很愚蠢 ajax 是不会跳转的
+                    window.location.href=ctx+'home/indexHome'
                 }
 
             })
@@ -63,6 +66,7 @@
         }
 
     })
+
 
 
 </script>
