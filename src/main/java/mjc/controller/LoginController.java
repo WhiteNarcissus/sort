@@ -45,15 +45,6 @@ public class LoginController {
             return modelAndView;
         }
 
-
-        if(user.getUserName()==null){
-            returnObject.setCode(Code.SUCCESS);
-            returnObject.setMsg("用户名为空");
-            modelAndView.setViewName("/shiro/permissions");
-            return modelAndView;
-        }
-
-
         //主体,当前状态为没有认证的状态“未认证”
         Subject subject = SecurityUtils.getSubject();
         // 登录后存放进shiro token
@@ -78,25 +69,14 @@ public class LoginController {
             returnObject.setData(user);
             returnObject.setMsg("用户："+ user.getUserName() +"---登入");
         } catch (UnknownAccountException e) {
-
-            return null;
+            modelAndView.setViewName("index");
+            return  modelAndView;
         }
 
         return modelAndView;
 
     }
 
-  // @RequestMapping("/signUp")
-    public ModelAndView aa(){
-
-        //重定向
-       // return "redirect: permissions/list";
-
-       ModelAndView modelAndView = new ModelAndView();
-       //modelAndView.setViewName("redirect: shiro/permissions");
-       modelAndView.setViewName("forward:permissions/list");
-      return modelAndView;
-    }
 
 
 }
