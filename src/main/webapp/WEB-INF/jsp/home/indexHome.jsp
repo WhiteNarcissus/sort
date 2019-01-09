@@ -15,7 +15,7 @@
 <body>
 
 来了来了
-<shiro:hasPermission name="admin:delete">
+<shiro:hasPermission name="/delete">
     222222
 </shiro:hasPermission>
 </body>
