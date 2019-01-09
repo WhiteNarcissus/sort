@@ -1,3 +1,5 @@
+<%@ taglib prefix="apache shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: gcb
@@ -13,5 +15,8 @@
 <body>
 
 来了来了
+<shiro:hasPermission name="admin:delete">
+    222222
+</shiro:hasPermission>
 </body>
 </html>

@@ -345,5 +345,16 @@
     </plugin>
     </plugins>
 
+    <resources>
+      <resource>
+        <targetPath>${basedir}/target/classes/mjc/dao/mapper</targetPath>
+        <directory>src/main/java/mjc/dao/mapper</directory>
+        <includes>
+          <include>*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+
+
   </build>
 </project>
