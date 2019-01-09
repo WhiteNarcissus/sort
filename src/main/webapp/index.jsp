@@ -7,7 +7,7 @@
 <body>
 <h2>Hello World!</h2>
 <div>
-    <form  method="post" action="<%=basePath%>/signUp" >
+    <form id="login"   method="post">
         <p>用户名：<input id="userName" name="userName" type="text" /></p>  <!--用户名文本框-->
         <p>密　码：<input id="userPassword" name="userPassword" type="password" /></p>  <!--密码文本框-->
         <p id="retry" class="retry"  hidden="hidden">
@@ -19,8 +19,8 @@
             <input type="checkbox" name="userHobbit" value="一切可以称得上爱好的爱好">一切可以称得上爱好的爱好<br>
             个性签名： <input id="userMessage" name="userMessage"  type="text" placeholder="输入签名"/><br>
         </p>
-        <input type=button id="subLogin"  type=submit  value="登入"  onclick="return check(this.form)">
-        <input type=button id="signUp"  type=submit  value="注册" onclick="return check(this.form)">
+        <input type=button id="subLogin"   value="登入" >
+        <input type=button id="signUp"   value="注册">
     </form>
 
 
@@ -29,11 +29,11 @@
 
 <script >
 
-    function check(form){
+    $("#subLogin").click(function () {
         var userName = $("#userName").val();
         var userPassword = $("#userPassword").val();
         $(".retry").hide();
-
+      debugger
       if(userName != null && userPassword != null && userPassword !="" && userName != "" ){
           $.ajax({
               url :"<%=basePath%>/signUp",
@@ -46,7 +46,7 @@
           })
       }
 
-    }
+    })
 
 
 

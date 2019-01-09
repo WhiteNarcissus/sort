@@ -68,6 +68,8 @@ public class LoginController {
             returnObject.setCode(Code.SUCCESS);
             returnObject.setData(user);
             returnObject.setMsg("用户："+ user.getUserName() +"---登入");
+            modelAndView.setViewName("redirect: home/indexHome");
+            modelAndView.addObject(user);
         } catch (UnknownAccountException e) {
             modelAndView.setViewName("index");
             return  modelAndView;

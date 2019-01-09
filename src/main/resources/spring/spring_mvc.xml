@@ -14,7 +14,9 @@
     <mvc:annotation-driven />
 
     <!-- 让扫描spring扫描这个包下所有的类，让标注spring注解的类生效 -->
-    <context:component-scan base-package="mjc"></context:component-scan>
+    <!-- 扫描文件（自动将 dao service层注入）   -->
+    <context:component-scan base-package="mjc" />
+
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
