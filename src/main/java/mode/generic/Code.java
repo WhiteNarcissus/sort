@@ -1,6 +1,7 @@
 package mode.generic;
 
 /**
+ * 枚举类 的用法
  * Created by gcb on 2018/12/19.
  * 为什么使用枚举类，
  * 有些对象是有限且固定的

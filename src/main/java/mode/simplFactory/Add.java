@@ -1,6 +1,7 @@
 package mode.simplFactory;
 
 /**
+ * 简单工厂
  * Created by gcb on 2019/1/2.
  */
 public class Add extends Operation {
