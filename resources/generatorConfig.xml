@@ -11,8 +11,8 @@
 
         <!--plugin 通用mapper 配置 在pom 文件 同时也要加上 tk.mybatis，否则为普通mapper -->
         <!-- 而且很奇怪的是必须在 main 下生成一个resources 文件夹 ，并且把 generatorConfig -->
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="tk.mybatis.mapper.common.Mapper" />
+        <plugin type="tk.mybatis.mjc.dao.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mjc.dao.mapper.common.Mapper" />
         </plugin>
 
         <!-- 注释 -->
