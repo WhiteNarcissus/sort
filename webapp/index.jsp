@@ -2,7 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html charset=gb2312">
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ include file="WEB-INF/jsp/head.jsp"%>
+    <%@ include file="head.jsp"%>
+
 </head>
 <body>
 <h2>Hello World!</h2>
@@ -26,8 +27,10 @@
 
 </div>
 
-
+<script src="js/jquery-3.3.1.min.js" ></script>
+<script src="js/vue.js" ></script>
 <script >
+
 
     $("#subLogin").click(function () {
         var userName = $("#userName").val();
